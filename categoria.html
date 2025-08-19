@@ -1,0 +1,29 @@
+
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Categoria - Rosa Luxe</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="header">
+  <div class="brand"><img src="logo.svg" alt="logo"><div><h1>Rosa Luxe</h1></div></div>
+  <nav class="nav"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="carrito.html">Carrito</a><a href="contacto.html">Contacto</a></nav>
+</header>
+
+<section class="container">
+  <h2 id="catTitle" style="color:var(--brand)">Categoría</h2>
+  <div id="prodGrid" class="grid"></div>
+</section>
+
+<footer class="footer"><div>Hecha por <strong>Emely Galindo</strong></div><div>© Rosa Luxe</div></footer>
+
+<script src="script.js"></script>
+<script>
+function qs(name){ return new URLSearchParams(location.search).get(name); }
+const cat = qs('cat') || 'labiales';
+document.getElementById('catTitle').innerText = cat.charAt(0).toUpperCase() + cat.slice(1);
+const list = PRODUCTS[cat]||[];
+const grid = document.getElementById('prodGrid');
+grid.innerHTML = list.map(p=>`<div class="card"><img src="${p.image}"><h3>${p.name}</h3><div class="price-row"><div class="price">L ${p.price}</div><button class="btn" onclick='addToCart(${JSON.stringify(p)})'>Agregar</button></div></div>`).join('');
+renderCartMini();
+</script>
+</body>
+</html>
